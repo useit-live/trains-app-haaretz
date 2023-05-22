@@ -14,12 +14,6 @@ const Table = ({search, pageProps}) => {
     const [searchString, setSearchString] = useState("");
     const [isSearching, startSearching] = useTransition();
 
-    const className = (item) => {
-        return !item?.stop?.departure || !item?.stop?.prognosis?.arrival
-            ? 'px-6 py-4 text-center font-bold text-red-500 whitespace-nowrap r'
-            : 'px-6 py-4 text-center font-medium text-gray-800 whitespace-nowrap'
-    }
-
     // const debounced = useDebounce(searchString);
 
     // useEffect(() => {
