@@ -1,7 +1,7 @@
 "use client";
 import {useState, useEffect, useTransition, useCallback} from "react";
 // import {useDebounce} from "@/hooks/use-debounce";
-import {dateTimeConverter} from "@/helper";
+import {dateTimeConverter} from "utils";
 import debounce from "lodash.debounce";
 import Loader from "@/components/loader/Loader";
 

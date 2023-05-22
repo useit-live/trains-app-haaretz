@@ -1,4 +1,4 @@
-import {buildUrl} from "@/helper";
+import {buildUrl} from "utils";
 import Table from "@/components/table/Table";
 
 const loadDataFromServer = async (url) => {
