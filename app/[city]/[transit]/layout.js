@@ -1,11 +1,11 @@
-import RadioBar from "@/app/components/radiobar/RadioBar";
+import RadioButtons from "@/components/radiobuttons/RadioButtons";
 
 const Layout = ({children}) => {
     return (
-        <div>
-            <RadioBar/>
+        <section>
+            <RadioButtons/>
             {children}
-        </div>
+        </section>
     );
 };
 

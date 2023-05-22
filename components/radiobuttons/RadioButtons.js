@@ -3,7 +3,7 @@
 import {useParams, useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 
-const RadioBar = () => {
+const RadioButtons = () => {
     const router = useRouter();
     const params = useParams();
     const [value, setValue] = useState('');
@@ -44,4 +44,4 @@ const RadioBar = () => {
     );
 };
 
-export default RadioBar;
+export default RadioButtons;
