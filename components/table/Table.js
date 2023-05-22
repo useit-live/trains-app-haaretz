@@ -54,14 +54,14 @@ const Table = ({search}) => {
             <div className="flex justify-center gap-2 my-5">
                 {/*<input*/}
                 {/*    type="text"*/}
-                {/*    placeholder='Search'*/}
+                {/*    placeholder='Search by City'*/}
                 {/*    value={searchString}*/}
                 {/*    onChange={(e) => setSearchString(e.target.value)}*/}
                 {/*    className='border focus:border-transparent px-2'*/}
                 {/*/>*/}
                 <input
                     type="text"
-                    placeholder='Serach'
+                    placeholder='Search by City'
                     value={searchString}
                     onChange={(e) => {
                         setSearchString(e.target.value);
