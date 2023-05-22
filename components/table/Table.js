@@ -1,6 +1,5 @@
 "use client";
 import {useState, useEffect, useTransition, useCallback} from "react";
-import {format} from "date-fns";
 // import {useDebounce} from "@/hooks/use-debounce";
 import {dateTimeConverter} from "@/helper";
 import debounce from "lodash.debounce";
@@ -14,6 +13,12 @@ const Table = ({search, pageProps}) => {
     const [destinations, setDestinations] = useState([]);
     const [searchString, setSearchString] = useState("");
     const [isSearching, startSearching] = useTransition();
+
+    const className = (item) => {
+        return !item?.stop?.departure || !item?.stop?.prognosis?.arrival
+            ? 'px-6 py-4 text-center font-bold text-red-500 whitespace-nowrap r'
+            : 'px-6 py-4 text-center font-medium text-gray-800 whitespace-nowrap'
+    }
 
     // const debounced = useDebounce(searchString);
 
@@ -90,14 +95,14 @@ const Table = ({search, pageProps}) => {
                                 <tbody className="divide-y divide-gray-200">
                                 {destinations?.map((item, index) => (
                                     <tr key={index}>
-                                        {dateTimeConverter(pageProps.params.transit, item)
+                                        {pageProps.params.transit === 'departures'
                                             ? <td
-                                                className="px-6 py-4 text-center font-medium text-gray-800 whitespace-nowrap">
-                                                {format(new Date(dateTimeConverter(pageProps.params.transit, item)), "d MMM yyyy 'at' h:mm bb")}
+                                                className={item.stop?.departure ? 'px-6 py-4 text-center font-medium text-gray-800 whitespace-nowrap' : 'px-6 py-4 text-center font-bold text-red-500 whitespace-nowrap'}>
+                                                {item.stop?.departure ? dateTimeConverter(item?.stop?.departure) : 'Not final'}
                                             </td>
                                             : <td
-                                                className="px-6 py-4 text-center font-bold whitespace-nowrap text-red-500">
-                                                Not final
+                                                className={item.stop?.prognosis?.arrival ? 'px-6 py-4 text-center font-medium text-gray-800 whitespace-nowrap' : 'px-6 py-4 text-center font-bold text-red-500 whitespace-nowrap'}>
+                                                {item.stop?.prognosis?.arrival ? dateTimeConverter(item?.stop?.prognosis?.arrival) : 'Not final'}
                                             </td>
                                         }
                                         <td className="px-6 py-4 text-center text-gray-800 whitespace-nowrap">
