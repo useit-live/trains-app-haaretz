@@ -1,74 +1,22 @@
-"use client";
-import {useState, useEffect} from "react";
-import {dateTimeConverter} from "@/helper";
-import {format} from "date-fns";
+import {buildUrl} from "@/helper";
+import Table from "@/components/table/Table";
 
-export default function Trains({search}) {
-    const [destinations, setDestinations] = useState([]);
-    const [searchString, setSearchString] = useState("");
+const loadDataFromServer = async (url) => {
+    const response = await fetch(url, {next: {tags: ['collection']}, revalidate: 360})
+    return response.json()
+}
+export default async function Trains(props) {
+    const url = buildUrl({city: props.params.city, transit: props.params.transit});
 
-    useEffect(() => {
-        search("").then((name) => setDestinations(name));
-    }, [search]);
-
-    const onClick = async () => {
-        setDestinations(await search(searchString));
-    };
+    async function search(search) {
+        "use server";
+        const trainsData = await loadDataFromServer(url);
+        return trainsData.stationboard
+            .filter((item) => item.to.toLowerCase().includes(search.toLowerCase()))
+            .map((item) => item)
+    }
 
     return (
-        <>
-            <div className="flex justify-center gap-2 my-5">
-                <input
-                    type="text"
-                    value={searchString}
-                    onChange={(e) => setSearchString(e.target.value)}
-                    className='border focus:border-transparent px-2'
-                />
-                <button onClick={onClick} className='border focus:border-transparent px-2'>
-                    Search
-                </button>
-            </div>
-            <div className="flex flex-col">
-                <div className="overflow-x-auto flex justify-center">
-                    <div className="p-1.5 inline-block align-middle w-9/12">
-                        <div className="overflow-hidden border rounded-lg">
-                            <table className="min-w-full divide-y divide-gray-200">
-                                <thead className="bg-gray-50">
-                                <tr>
-                                    <th scope="col"
-                                        className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase">
-                                        Date / Time
-                                    </th>
-                                    <th scope="col"
-                                        className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase">
-                                        City
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody className="divide-y divide-gray-200">
-                                {destinations?.map((item, index) => (
-                                    <tr key={index}>
-                                        {dateTimeConverter(null, item)
-                                            ? <td
-                                                className="px-6 py-4 text-center font-medium text-gray-800 whitespace-nowrap">
-                                                {format(new Date(dateTimeConverter(null, item)), "d MMM yyyy 'at' h:mm bb")}
-                                            </td>
-                                            : <td
-                                                className="px-6 py-4 text-center font-bold whitespace-nowrap text-red-500">
-                                                Not final
-                                            </td>
-                                        }
-                                        <td className="px-6 py-4 text-center text-gray-800 whitespace-nowrap">
-                                            {item.to}
-                                        </td>
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
+        <Table search={search}/>
     );
 }
