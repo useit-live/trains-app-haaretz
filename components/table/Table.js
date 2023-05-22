@@ -1,37 +1,75 @@
 "use client";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useTransition, useCallback} from "react";
 import {format} from "date-fns";
-import {useDebounce} from "@/hooks/use-debounce";
+// import {useDebounce} from "@/hooks/use-debounce";
 import {dateTimeConverter} from "@/helper";
+import debounce from "lodash.debounce";
+import Loader from "@/components/loader/Loader";
 
+/*
+    Uncomment the commented code for client side sorting
+ */
 const Table = ({search}) => {
     const [destinations, setDestinations] = useState([]);
     const [searchString, setSearchString] = useState("");
-    const debounced = useDebounce(searchString);
+    const [isSearching, startSearching] = useTransition();
 
 
-    useEffect(() => {
-        search("").then((name) => setDestinations(name));
+    // const debounced = useDebounce(searchString);
+
+    // useEffect(() => {
+    //     search("").then((name) => setDestinations(name));
+    // }, [search]);
+    //
+    // const setFilter = async () => setDestinations(await search(debounced));
+    //
+    // useEffect(() => {
+    //     setFilter().then(() => {
+    //     });
+    // }, [debounced])
+
+
+    const debouncedFn = debounce((str) => {
+        startSearching(() => {
+            console.log('str', str);
+            search(str)
+                .then(res => {
+                    setDestinations(res);
+                });
+        })
+    }, 1000);
+    const memorizedFn = useCallback((str) => {
+        debouncedFn(str);
     }, [search]);
 
-    const setFilter = async () => setDestinations(await search(debounced));
-
     useEffect(() => {
-        setFilter().then(() => {
+        search("").then(res => {
+            setDestinations(res);
         });
-    }, [debounced])
+    }, [search, setDestinations]);
 
     return (
         <>
             <div className="flex justify-center gap-2 my-5">
+                {/*<input*/}
+                {/*    type="text"*/}
+                {/*    placeholder='Serach'*/}
+                {/*    value={searchString}*/}
+                {/*    onChange={(e) => setSearchString(e.target.value)}*/}
+                {/*    className='border focus:border-transparent px-2'*/}
+                {/*/>*/}
                 <input
                     type="text"
                     placeholder='Serach'
                     value={searchString}
-                    onChange={(e) => setSearchString(e.target.value)}
+                    onChange={(e) => {
+                        setSearchString(e.target.value);
+                        memorizedFn(e.target.value);
+                    }}
                     className='border focus:border-transparent px-2'
                 />
             </div>
+            {isSearching && <Loader/>}
             <div className="flex flex-col">
                 <div className="overflow-x-auto flex justify-center">
                     <div className="p-1.5 inline-block align-middle w-9/12">

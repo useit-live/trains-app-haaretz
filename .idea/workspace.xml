@@ -43,6 +43,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2022.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -51,11 +52,11 @@
       <recent name="C:\Users\adler\WebstormProjects\trains-app-haaretz-v1\app\[city]" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\adler\WebstormProjects\trains-app-haaretz-v1\app\helper" />
-      <recent name="C:\Users\adler\WebstormProjects\trains-app-haaretz-v1\app" />
       <recent name="C:\Users\adler\WebstormProjects\trains-app-haaretz-v1\app\[city]\[transit]" />
       <recent name="C:\Users\adler\WebstormProjects\trains-app-haaretz-v1\components" />
-      <recent name="C:\Users\adler\WebstormProjects\trains-app-haaretz-v1\app\loader" />
+      <recent name="C:\Users\adler\WebstormProjects\trains-app-haaretz-v1\app\search" />
+      <recent name="C:\Users\adler\WebstormProjects\trains-app-haaretz-v1\app" />
+      <recent name="C:\Users\adler\WebstormProjects\trains-app-haaretz-v1" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -67,6 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1684693798938</updated>
       <workItem from="1684693800117" duration="7999000" />
+      <workItem from="1684727841348" duration="43810000" />
     </task>
     <servers />
   </component>
