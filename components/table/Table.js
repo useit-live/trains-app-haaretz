@@ -6,8 +6,9 @@ import {dateTimeConverter} from "@/helper";
 import debounce from "lodash.debounce";
 import Loader from "@/components/loader/Loader";
 
-/*
-    Uncomment the commented code for client side sorting
+
+/**
+ * Uncomment following commented code for sorting trains without useTransition
  */
 const Table = ({search}) => {
     const [destinations, setDestinations] = useState([]);
@@ -53,7 +54,7 @@ const Table = ({search}) => {
             <div className="flex justify-center gap-2 my-5">
                 {/*<input*/}
                 {/*    type="text"*/}
-                {/*    placeholder='Serach'*/}
+                {/*    placeholder='Search'*/}
                 {/*    value={searchString}*/}
                 {/*    onChange={(e) => setSearchString(e.target.value)}*/}
                 {/*    className='border focus:border-transparent px-2'*/}
