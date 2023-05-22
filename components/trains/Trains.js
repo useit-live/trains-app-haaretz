@@ -17,6 +17,6 @@ export default async function Trains(props) {
     }
 
     return (
-        <Table search={search}/>
+        <Table search={search} pageProps={props}/>
     );
 }

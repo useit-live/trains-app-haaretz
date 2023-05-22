@@ -10,11 +10,10 @@ import Loader from "@/components/loader/Loader";
 /**
  * Uncomment following commented code for sorting trains without useTransition
  */
-const Table = ({search}) => {
+const Table = ({search, pageProps}) => {
     const [destinations, setDestinations] = useState([]);
     const [searchString, setSearchString] = useState("");
     const [isSearching, startSearching] = useTransition();
-
 
     // const debounced = useDebounce(searchString);
 
@@ -91,10 +90,10 @@ const Table = ({search}) => {
                                 <tbody className="divide-y divide-gray-200">
                                 {destinations?.map((item, index) => (
                                     <tr key={index}>
-                                        {dateTimeConverter(null, item)
+                                        {dateTimeConverter(pageProps.params.transit, item)
                                             ? <td
                                                 className="px-6 py-4 text-center font-medium text-gray-800 whitespace-nowrap">
-                                                {format(new Date(dateTimeConverter(null, item)), "d MMM yyyy 'at' h:mm bb")}
+                                                {format(new Date(dateTimeConverter(pageProps.params.transit, item)), "d MMM yyyy 'at' h:mm bb")}
                                             </td>
                                             : <td
                                                 className="px-6 py-4 text-center font-bold whitespace-nowrap text-red-500">
