@@ -6,8 +6,6 @@ const loadDataFromServer = async (url) => {
     return response.json()
 }
 export default async function Trains(props) {
-
-    console.log(props)
     const url = buildUrl({city: props.params.city, transit: props.params.transit});
 
     async function search(search) {
