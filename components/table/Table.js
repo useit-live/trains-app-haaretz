@@ -1,32 +1,12 @@
 "use client";
 import {useState, useEffect, useTransition, useCallback} from "react";
-// import {useDebounce} from "@/hooks/use-debounce";
 import {dateTimeConverter} from "utils";
 import debounce from "lodash.debounce";
 import Loader from "@/components/loader/Loader";
-
-
-/**
- * Uncomment following commented code for sorting trains without useTransition
- */
 const Table = ({search, pageProps}) => {
     const [destinations, setDestinations] = useState([]);
     const [searchString, setSearchString] = useState("");
     const [isSearching, startSearching] = useTransition();
-
-    // const debounced = useDebounce(searchString);
-
-    // useEffect(() => {
-    //     search("").then((name) => setDestinations(name));
-    // }, [search]);
-    //
-    // const setFilter = async () => setDestinations(await search(debounced));
-    //
-    // useEffect(() => {
-    //     setFilter().then(() => {
-    //     });
-    // }, [debounced])
-
 
     const debouncedFn = debounce((str) => {
         startSearching(() => {
@@ -50,13 +30,6 @@ const Table = ({search, pageProps}) => {
     return (
         <>
             <div className="flex justify-center gap-2 my-5">
-                {/*<input*/}
-                {/*    type="text"*/}
-                {/*    placeholder='Search by City'*/}
-                {/*    value={searchString}*/}
-                {/*    onChange={(e) => setSearchString(e.target.value)}*/}
-                {/*    className='border focus:border-transparent px-2'*/}
-                {/*/>*/}
                 <input
                     type="text"
                     placeholder='Search by City'
